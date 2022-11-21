@@ -1,0 +1,46 @@
+{\rtf1\ansi\ansicpg1251\cocoartf2636
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fmodern\fcharset0 Courier;\f1\fmodern\fcharset0 Courier-Oblique;}
+{\colortbl;\red255\green255\blue255;\red109\green109\blue109;\red32\green32\blue32;\red191\green100\blue38;
+\red153\green168\blue186;\red254\green187\blue91;\red133\green96\blue154;\red86\green132\blue173;\red88\green118\blue71;
+}
+{\*\expandedcolortbl;;\csgenericrgb\c42745\c42745\c42745;\csgenericrgb\c12549\c12549\c12549;\csgenericrgb\c74902\c39216\c14902;
+\csgenericrgb\c60000\c65882\c72941;\csgenericrgb\c99608\c73333\c35686;\csgenericrgb\c52157\c37647\c60392;\csgenericrgb\c33725\c51765\c67843;\csgenericrgb\c34510\c46275\c27843;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs26 \cf2 \cb3 --4)\
+\cf4 select \cf5 vowels/
+\f1\i \cf6 cast
+\f0\i0 \cf5 (all_players \cf4 as float\cf5 ) percentage\cf4 , \cf5 tmp1.\cf7 country_id \cf4 from \cf5 (\
+    \cf4 select 
+\f1\i \cf6 count
+\f0\i0 \cf5 (\cf6 *\cf5 ) vowels\cf4 , \cf7 country_id \cf4 from \cf5 players\
+    \cf4 where 
+\f1\i \cf6 substr
+\f0\i0 \cf5 (\cf7 name\cf4 , \cf8 1\cf4 , \cf8 1\cf5 ) \cf4 in \cf5 (\cf9 'A'\cf4 , \cf9 'E'\cf4 , \cf9 'O'\cf4 , \cf9 'I'\cf4 , \cf9 'U'\cf5 )\
+    \cf4 group by \cf7 country_id\cf5 )\
+\cf4 as \cf5 tmp1 \cf4 join \cf5 (\
+    \cf4 select 
+\f1\i \cf6 count
+\f0\i0 \cf5 (\cf6 *\cf5 ) all_players\cf4 , \cf7 country_id \cf4 from \cf5 players\
+    \cf4 group by \cf7 country_id\cf5 )\
+\cf4 as \cf5 tmp2 \cf4 on \cf5 (tmp1.\cf7 country_id \cf5 = tmp2.\cf7 country_id\cf5 )\
+\cf4 order by \cf5 percentage \cf4 desc\
+\
+\cf2 --5)\
+\cf4 select \cf5 count_medals/
+\f1\i \cf6 cast
+\f0\i0 \cf5 (population \cf4 as float\cf5 ) ratio\cf4 , c\cf5 .\cf7 country_id\
+\cf4 from \cf5 (\
+    \cf4 select 
+\f1\i \cf6 count
+\f0\i0 \cf5 (\cf6 *\cf5 ) count_medals\cf4 , \cf5 p.\cf7 country_id \cf4 from \cf5 events e\
+    \cf4 join \cf5 results r \cf4 on \cf5 e.\cf7 event_id \cf5 = r.\cf7 event_id\
+    \cf4 join \cf5 players p \cf4 on \cf5 p.\cf7 player_id \cf5 = r.\cf7 player_id\
+    \cf4 where \cf5 olympic_id=\cf9 'SYD2000' \cf4 and \cf5 is_team_event = \cf8 1\
+    \cf4 group by \cf5 p.\cf7 country_id\cf5 )\
+\cf4 as \cf5 tmp1 \cf4 join \cf5 countries \cf4 c on \cf5 (tmp1.\cf7 country_id \cf5 = \cf4 c\cf5 .\cf7 country_id\cf5 )\
+\cf4 order by \cf5 ratio \cf4 asc\
+limit \cf8 5\
+}
