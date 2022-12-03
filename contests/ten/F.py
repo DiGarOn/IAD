@@ -7,10 +7,14 @@ with open("input.txt") as f:
                 d[i] += 1
             else:
                 d[i] = 1
-    l = []
+
+    d1 = {}
     for k in d.keys():
-        l.append((d[k], k))
-    print(l)
-    l.sort(reverse=True)
+        if(d[k] in d1.keys()):
+            d1[d[k]].append(k)
+        else:
+            d1[d[k]] = [k]
+    l = sorted(d1.keys(), reverse=True)
+    # print(l)
     for i in l:
-        print(i[1])
+        print("\n".join(sorted(d1[i])))

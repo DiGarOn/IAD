@@ -1,13 +1,21 @@
+#ok
+
 with open("input.txt") as f:
     n = int(f.readline())
-    s = set(i for i in range(1,n+1))
-    yes = set()
-    no = {}
+    yes = {i for i in range(1,n+1)}
+
     for line in f:
-        if(l[0] != 'H'):
-            tmp = set(map(int, line.split()))
-            if(len(tmp) == len(s)/2):
-                print("NO")
-                s.difference_update(tmp)
+        if(line[0] != 'H'):
+            tmp = set(map(int,line.split()))
+            if(len(tmp) >= len(yes)/2):
+                if(len(yes.intersection(tmp)) > len(yes.difference(tmp))):
+                    print("YES")
+                    yes.intersection_update(tmp)
+                else:
+                    print("NO")
+                    yes.difference_update(tmp)
             else:
-                if()
+                print("NO")
+                yes.difference_update(tmp)
+        else:
+            print(*sorted(yes))

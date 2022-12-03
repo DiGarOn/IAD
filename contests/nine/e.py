@@ -1,3 +1,4 @@
+# ok
 n,m = map(int,input().split())
 a = set()
 b = set()
@@ -8,6 +9,7 @@ for i in range(m):
 c = a.intersection(b)
 a.difference_update(c)
 b.difference_update(c)
+
 print(len(c))
 print(*sorted(c))
 print(len(a))

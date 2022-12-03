@@ -1,21 +1,16 @@
+#ok
+
 with open("input.txt") as f:
     n = int(f.readline())
-    no = set()
-    yes = set()
+    yes = {i for i in range(1, n+1)}
     tmp = set()
-    digits = set("1234567890")
+    digits = set("0123456789")
     for line in f:
-        # print(line)
         if(line[0] in digits):
-            tmp = set(map(str, line.split()))
+            tmp = set(map(int, line.split()))
         elif line[0] == "Y":
-            # print("here")
-            if(len(yes) != 0):
-                yes.intersection_update(tmp)
-            else:
-                yes = tmp
+            yes.intersection_update(tmp)
         elif line[0] == "N":
-            no.update(tmp)
+            yes.difference_update(tmp)
         elif line[0] == "H":
-            print(*sorted(yes.difference(no)))
-
+            print(*sorted(yes))
