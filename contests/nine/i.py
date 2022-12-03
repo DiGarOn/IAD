@@ -8,11 +8,11 @@ with open ("input.txt", "r") as f:
         tmp = set()
         for j in range(m):
             tmp.update(set([f.readline()]))
-        if(len(tmp) > len(hole)):
-            hole = set()
-            hole.update(tmp)
-        # hole.update(tmp)
-        if(len(uniq)):
+        # if(len(tmp) > len(hole)):
+            # hole = set()
+            # hole.update(tmp)
+        hole.update(tmp)
+        if(i>0):
             uniq.intersection_update(tmp)
         else:
             uniq.update(tmp)
