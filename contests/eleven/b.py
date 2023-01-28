@@ -1,0 +1,1 @@
+print(len(set(map(str, open("input.txt").read().split()))))
